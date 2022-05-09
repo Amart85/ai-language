@@ -1,14 +1,8 @@
 # Update these with your service and model values
-<#
 $key=<YOUR KEY>
 $endpoint=<YOUR ENDPOINT>
 $projectName = <YOUR PROJECT NAME>
 $modelName = <YOUR MODEL NAME>
-#>
-$key="2bb7b3e07ef84151bd2e8f29ebeabc1d"
-$endpoint="https://ib-ner.cognitiveservices.azure.com/"
-$projectName = "ClassifyArticles"
-$modelName = "ArticlesModel"
 
 # Set up headers for API call
 $headers = @{}
