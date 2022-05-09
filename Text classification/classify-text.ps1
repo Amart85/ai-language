@@ -46,7 +46,6 @@ $data = @{
     }
 } | ConvertTo-Json -Depth 6
 
-Write-Host $data
 # Post text for classification
 Write-Host("`n***Submitting text classification task***")
 $response = Invoke-WebRequest -Method Post `
