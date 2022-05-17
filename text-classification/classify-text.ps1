@@ -1,8 +1,9 @@
 # Update these with your service and model values
-$key=<YOUR KEY>
-$endpoint=<YOUR ENDPOINT>
-$projectName = <YOUR PROJECT NAME>
-$modelName = <YOUR MODEL NAME>
+$key="2bb7b3e07ef84151bd2e8f29ebeabc1d"
+$endpoint="https://ib-ner.cognitiveservices.azure.com/"
+$projectName = "Class"
+$deploymentName = "articles"
+$verbose = $false
 
 # Set up headers for API call
 $headers = @{}
@@ -31,7 +32,7 @@ $data = @{
             @{
                 "parameters"= @{
                       "project-name" = $projectName
-                      "deployment-name" = $modelName
+                      "deployment-name" = $deploymentName
                 }
             }
         )
@@ -52,6 +53,12 @@ $response = Invoke-WebRequest -Method Post `
           -Uri "$($endpoint)text/analytics/v3.2-preview.2/analyze" `
           -Headers $headers `
           -Body $data
+
+# Output response if desired
+if ($verbose) {
+    Write-Host("`nPOST JSON Response:`n$response`n")
+    Write-Host("`nResponse header:$($response.Headers['Operation-Location'])`n")
+}
 
 # Extract the URL from the response
 # to call the API to getting the analysis results
@@ -76,6 +83,11 @@ Write-Host "...Done`n"
 # Access the relevant fields from the analysis
 $classification = $result | ConvertFrom-Json
 $docs = $classification.tasks.customSingleClassificationTasks[0].results.documents
+
+# Output response if desired
+if ($verbose) {
+    Write-Host("`nGET JSON Response:`n$classification`n")
+}
 
 for (($idx = 0); $idx -lt $docs.Length; $idx++) {
     $item = $docs[$idx] 
