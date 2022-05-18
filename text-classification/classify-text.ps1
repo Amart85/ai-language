@@ -1,6 +1,6 @@
 # Update these with your service and model values
-$key="2bb7b3e07ef84151bd2e8f29ebeabc1d"
-$endpoint="https://ib-ner.cognitiveservices.azure.com/"
+$key="<YOUR-KEY>"
+$endpoint="<YOUR-ENDPOINT"
 $projectName = "Class"
 $deploymentName = "articles"
 $verbose = $false
@@ -56,7 +56,6 @@ $response = Invoke-WebRequest -Method Post `
 
 # Output response if desired
 if ($verbose) {
-    Write-Host("`nPOST JSON Response:`n$response`n")
     Write-Host("`nResponse header:$($response.Headers['Operation-Location'])`n")
 }
 
@@ -86,7 +85,7 @@ $docs = $classification.tasks.customSingleClassificationTasks[0].results.documen
 
 # Output response if desired
 if ($verbose) {
-    Write-Host("`nGET JSON Response:`n$classification`n")
+    Write-Host("GET JSON Response:`n$result`n")
 }
 
 for (($idx = 0); $idx -lt $docs.Length; $idx++) {
