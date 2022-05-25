@@ -1,8 +1,9 @@
 # Update these with your service and model values
-$key=<YOUR KEY>
-$endpoint=<YOUR ENDPOINT>
-$projectName = <YOUR PROJECT NAME>
-$modelName = <YOUR MODEL NAME>
+$key="<YOUR KEY>"
+$endpoint="<YOUR ENDPOINT>"
+$projectName = "customNERLab"
+$modelName = "customExtractAds"
+$verbose = $false
 
 # Set up headers for API call
 $headers = @{}
@@ -53,6 +54,11 @@ $response = Invoke-WebRequest -Method Post `
           -Headers $headers `
           -Body $data
 
+# Output response if desired
+if ($verbose) {
+    Write-Host("`nResponse header:$($response.Headers['Operation-Location'])`n")
+}
+
 # Extract the URL from the response
 # to call the API to getting the analysis results
 $resultUrl = $($response.Headers['Operation-Location'])
@@ -76,6 +82,11 @@ Write-Host "...Done`n"
 # Access the relevant fields from the analysis
 $extraction = $result | ConvertFrom-Json
 $docs = $extraction.tasks.customEntityRecognitionTasks[0].results.documents
+
+# Output response if desired
+if ($verbose) {
+    Write-Host("GET JSON Response:`n$result`n")
+}
 
 for (($idx = 0); $idx -lt $docs.Length; $idx++) {
     $item = $docs[$idx] 

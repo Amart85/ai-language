@@ -1,6 +1,6 @@
 # Update these with your service and model values
-$key="<YOUR-KEY>"
-$endpoint="<YOUR-ENDPOINT"
+$key="<YOU-KEY>"
+$endpoint="<YOUR-ENDPOINT>"
 $projectName = "Class"
 $deploymentName = "articles"
 $verbose = $false
